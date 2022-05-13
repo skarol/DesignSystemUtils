@@ -44,3 +44,14 @@ public struct ButtonAttributes: Equatable, Hashable {
         self.contentInsets = contentInsets
     }
 }
+
+extension ButtonAttributes.StateAttributes {
+    /// Modifies backgroundColor of view attributes
+    /// - Parameter backgroundColor: The background color value to apply.
+    /// - Returns: StateAttributes with modified background color.
+    public func with(backgroundColor: DSColor?) -> Self {
+        var modified = self
+        modified.viewAttributes.backgroundColor = backgroundColor
+        return modified
+    }
+}
