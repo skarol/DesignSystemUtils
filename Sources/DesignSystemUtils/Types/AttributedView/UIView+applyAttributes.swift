@@ -40,7 +40,6 @@ extension UIView {
     /// Applies Shadow Attributes for given view.
     /// - Parameter attributes: The Shadow Attributes to apply on a view.
     func apply(attributes: ShadowAttributes) {
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shadowColor = UIColor(dsColor: attributes.color).cgColor
         layer.shadowRadius = attributes.radius
         layer.shadowOpacity = attributes.opacity

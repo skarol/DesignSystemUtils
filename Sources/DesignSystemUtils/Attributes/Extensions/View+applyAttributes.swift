@@ -18,7 +18,7 @@ public extension View {
             }
             .cornerRadius(viewAttributes.cornerRadius ?? 0)
             .if(viewAttributes.borderAttributes) { view, borderAttributes in
-                view.apply(borderAttributes: borderAttributes)
+                view.apply(borderAttributes: borderAttributes, cornerRadius: viewAttributes.cornerRadius)
             }
             .if(viewAttributes.shadowAttributes) { view, shadowAttributes in
                 view.apply(shadowAttributes: shadowAttributes)
@@ -59,9 +59,12 @@ public extension View {
     /// Applies ``BorderAttributes`` for given view.
     /// - Parameter borderAttributes: The ``BorderAttributes`` to apply.
     /// - Returns: View with modified border.
-    @ViewBuilder func apply(borderAttributes: BorderAttributes) -> some View {
+    @ViewBuilder func apply(borderAttributes: BorderAttributes, cornerRadius: CGFloat?) -> some View {
         if let borderColor = borderAttributes.color {
-            self.border(Color(dsColor: borderColor), width: borderAttributes.width)
+            self.overlay(
+                RoundedRectangle(cornerRadius: cornerRadius ?? 0)
+                    .stroke(Color(dsColor: borderColor), lineWidth: borderAttributes.width)
+            )
         } else {
             self
         }

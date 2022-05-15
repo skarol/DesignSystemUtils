@@ -26,6 +26,11 @@ public struct Device: Identifiable {
     /// The Device's ``InterfaceOrientation``.
     public var interfaceOrientation: InterfaceOrientation = .portrait
 
+    /// The DEvice's layout.
+    public var layout: Layout {
+        Layout(screen: screen)
+    }
+
     private init(name: PreviewDevice, screen: Screen) {
         self.name = name
         self.screen = screen
@@ -36,8 +41,8 @@ public struct Device: Identifiable {
     /// Also inject proper Layout Environment Object.
     /// - Parameter content: The content view to be displayed inside ``PreviewDevice``.
     /// - Returns: Content view wrapped inside ``PreviewDevice`` with specified ``interfaceOrientation`` and injected proper Layout Environment Object.
-    public func makeView<Content: View>(content: () -> Content) -> some View {
-        content()
+    public func makeView<Content: View>(_ content: Content) -> some View {
+        content
             .previewDevice(name)
             .previewInterfaceOrientation(interfaceOrientation)
             .environmentObject(Layout(screen: screen.rotate(to: interfaceOrientation)))
@@ -56,6 +61,7 @@ public struct Device: Identifiable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, *)
 extension Device {
     public static let basic: [Device] = [
+        .iPhone_SE_1st_gen,
         .iPhone_12,
         .iPad_9th_gen,
         .iPad_mini_6th_gen.rotate(to: .landscapeLeft),

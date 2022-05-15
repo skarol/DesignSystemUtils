@@ -1,12 +1,12 @@
 //
 //  SizeVariants+ButtonAttributes.swift
-//  
+//
 //
 //  Created by Karolina Samorek on 13/05/2022.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 public extension SizeVariants where Variant == ButtonAttributes {
     /// Modifies ``contentInsets`` of each variant.
@@ -19,12 +19,12 @@ public extension SizeVariants where Variant == ButtonAttributes {
 
 public extension SizeVariants where Variant == ButtonAttributes.StateAttributes {
     /// Converts ``SizeVariants<ButtonAttributes.StateAttributes>`` to ``SizeVariants<[ControlState: ButtonAttributes.StateAttributes]>``
-    /// - Parameter backgroundColorForState: The background color to apply for specific state.
-    /// - Returns: ``SizeVariants<[ControlState: ButtonAttributes.StateAttributes]>`` with provided background colors for each state.
-    func toStates(backgroundColorForState: [ControlState: DSColor]) -> SizeVariants<[ControlState: Variant]> {
+    /// - Parameter viewAttributes: The view attributes to apply on specific state.
+    /// - Returns:  Returns: ``SizeVariants<[ControlState: ButtonAttributes.StateAttributes]>`` with provided view attributes for each state.
+    func toStates(viewAttributes: [ControlState: ViewAttributes]) -> SizeVariants<[ControlState: Variant]> {
         convert { stateVariant in
-            backgroundColorForState.keys.reduce(into: [:]) { partialResult, state in
-                partialResult[state] = stateVariant.with(backgroundColor: backgroundColorForState[state])
+            viewAttributes.keys.reduce(into: [:]) { partialResult, state in
+                partialResult[state] = stateVariant.with(viewAttributes: viewAttributes[state] ?? stateVariant.viewAttributes)
             }
         }
     }

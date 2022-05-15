@@ -46,12 +46,21 @@ public struct ButtonAttributes: Equatable, Hashable {
 }
 
 extension ButtonAttributes.StateAttributes {
-    /// Modifies backgroundColor of view attributes
+    /// Modifies backgroundColor of view attributes.
     /// - Parameter backgroundColor: The background color value to apply.
     /// - Returns: StateAttributes with modified background color.
     public func with(backgroundColor: DSColor?) -> Self {
         var modified = self
         modified.viewAttributes.backgroundColor = backgroundColor
+        return modified
+    }
+
+    /// Modifies view attributes of button.
+    /// - Parameter viewAttributes: The view attributes value to apply.
+    /// - Returns: StateAttributes with modified view attributes.
+    public func with(viewAttributes: ViewAttributes) -> Self {
+        var modified = self
+        modified.viewAttributes = viewAttributes
         return modified
     }
 }
