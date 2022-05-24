@@ -27,7 +27,6 @@ extension UIView {
         }
     }
 
-
     /// Applies border attributes for given view.
     /// - Parameter attributes: The Border Attributes to apply on a view.
     func apply(attributes: BorderAttributes) {

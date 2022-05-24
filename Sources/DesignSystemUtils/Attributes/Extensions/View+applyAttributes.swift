@@ -43,16 +43,25 @@ public extension View {
     /// - Returns: Modified View.
     @ViewBuilder func apply(textAttributes: TextAttributes?) -> some View {
         if let textAttributes = textAttributes {
-            self.if(textAttributes.lineSpacing) { view, lineSpacing in
-                view.lineSpacing(lineSpacing)
-            }
-            .font(Font(textAttributes.font))
-            .foregroundColor(Color(dsColor: textAttributes.color))
-            .if(textAttributes.alignment) { view, alignment in
-                view.multilineTextAlignment(alignment)
-            }
+            self.apply(textAttributes: textAttributes)
         } else {
             self
+        }
+    }
+
+    /// Applies ``TextAttributes`` for given view.
+    ///
+    /// - Parameters:
+    ///   - attributes: The ``TextAttributes`` to apply.
+    /// - Returns: Modified View.
+    @ViewBuilder func apply(textAttributes: TextAttributes) -> some View {
+        self.if(textAttributes.lineSpacing) { view, lineSpacing in
+            view.lineSpacing(lineSpacing)
+        }
+        .font(Font(textAttributes.font))
+        .foregroundColor(Color(dsColor: textAttributes.color))
+        .if(textAttributes.alignment) { view, alignment in
+            view.multilineTextAlignment(alignment)
         }
     }
 

@@ -9,17 +9,6 @@ import CoreGraphics
 
 /// UI Attributes that can be applied on a button to change it visually.
 public struct ButtonAttributes: Equatable, Hashable {
-    /// Chunk of ``ButtonAttributes`` that is assigned to certain ``ControlState``.
-    public struct StateAttributes: Equatable, Hashable {
-        public var viewAttributes: ViewAttributes
-        public var textAttributes: TextAttributes
-
-        public init(viewAttributes: ViewAttributes, textAttributes: TextAttributes) {
-            self.viewAttributes = viewAttributes
-            self.textAttributes = textAttributes
-        }
-    }
-
     /// Attributes assigned to certain button ``ControlState``.
     public var stateAttributes: [ControlState: StateAttributes]
 
@@ -42,6 +31,17 @@ public struct ButtonAttributes: Equatable, Hashable {
     public init(normalStateAttributes: StateAttributes, contentInsets: LayoutEdgeInsets = .none) {
         self.stateAttributes = [.normal: normalStateAttributes]
         self.contentInsets = contentInsets
+    }
+
+    /// Chunk of ``ButtonAttributes`` that is assigned to certain ``ControlState``.
+    public struct StateAttributes: Equatable, Hashable {
+        public var viewAttributes: ViewAttributes
+        public var textAttributes: TextAttributes
+
+        public init(viewAttributes: ViewAttributes, textAttributes: TextAttributes) {
+            self.viewAttributes = viewAttributes
+            self.textAttributes = textAttributes
+        }
     }
 }
 
